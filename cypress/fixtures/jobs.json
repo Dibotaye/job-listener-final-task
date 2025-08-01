@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "1",
+      "title": "Software Engineer",
+      "orgName": "Tech Company",
+      "location": ["San Francisco", "CA"],
+      "description": "A great software engineering position with exciting challenges and growth opportunities.",
+      "logoUrl": "https://example.com/logo1.png",
+      "categories": ["Engineering", "Full-time"],
+      "opType": "Full-time",
+      "datePosted": "2023-01-01",
+      "deadline": "2023-12-31",
+      "isBookmarked": false
+    },
+    {
+      "id": "2",
+      "title": "Product Manager",
+      "orgName": "Innovation Corp",
+      "location": ["New York", "NY"],
+      "description": "Lead product development and strategy for cutting-edge technology solutions.",
+      "logoUrl": "https://example.com/logo2.png",
+      "categories": ["Product", "Management"],
+      "opType": "Full-time",
+      "datePosted": "2023-01-02",
+      "deadline": "2023-11-30",
+      "isBookmarked": false
+    },
+    {
+      "id": "3",
+      "title": "UX Designer",
+      "orgName": "Design Studio",
+      "location": ["Los Angeles", "CA"],
+      "description": "Create beautiful and intuitive user experiences for web and mobile applications.",
+      "logoUrl": "https://example.com/logo3.png",
+      "categories": ["Design", "Creative"],
+      "opType": "Contract",
+      "datePosted": "2023-01-03",
+      "deadline": "2023-10-31",
+      "isBookmarked": false
+    }
+  ]
+}

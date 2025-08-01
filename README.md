@@ -143,24 +143,9 @@ npm run cypress:open
 - JWT token management
 - Protected routes and API calls
 
-### Search & Filter
-
-- Real-time job search by title
-- Sort options for job listings
-- Responsive search interface
-
 ### Error Handling
 
 - Comprehensive error boundaries
 - User-friendly error messages
 - Network error recovery
 - Loading states and feedback
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Run the test suite
-6. Submit a pull request

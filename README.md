@@ -4,11 +4,10 @@ A modern job listing application built with Next.js, TypeScript, and Tailwind CS
 
 ## Features
 
-- 🔐 **User Authentication** - Secure signup, signin, and email verification
-- 🔍 **Job Search** - Search jobs by title with real-time results
-- 🔖 **Bookmark System** - Save and manage favorite job opportunities
-- 📱 **Responsive Design** - Works seamlessly on desktop and mobile
-- 🧪 **Comprehensive Testing** - Unit tests with Jest and E2E tests with Cypress
+- **User Authentication** - Secure signup, signin, and email verification
+- **Bookmark System** - Save and manage favorite job opportunities
+- **Responsive Design** - Works seamlessly on desktop and mobile
+- **Comprehensive Testing** - Unit tests with Jest and E2E tests with Cypress
 
 ## Screenshots
 

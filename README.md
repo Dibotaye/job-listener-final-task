@@ -12,54 +12,45 @@ A modern job listing application built with Next.js, TypeScript, and Tailwind CS
 
 ## Screenshots
 
-### 1. Sign Up Page
-![Sign Up Page](./screenshots/signup.png)
-*User registration with email verification*
-
 ### 2. Sign In Page
-![Sign In Page](./screenshots/signin.png)
-*Secure user authentication*
 
-### 3. Email Verification
-![Email Verification](./screenshots/verify-email.png)
-*OTP-based email verification system*
+![Sign In Page](./screenshots/signin.png)
+_Secure user authentication_
 
 ### 4. Job Listings
-![Job Listings](./screenshots/job-listings.png)
-*Browse and search job opportunities with bookmark functionality*
 
-### 5. Job Details
-![Job Details](./screenshots/job-details.png)
-*Detailed job information with bookmark toggle*
+![Job Listings](./screenshots/job.png)
+_Browse and search job opportunities with bookmark functionality_
 
 ### 6. Bookmarked Jobs
-![Bookmarked Jobs](./screenshots/bookmarked-jobs.png)
-*View and manage saved job opportunities*
+
+![Bookmarked Jobs](./screenshots/image.png)
+_View and manage saved job opportunities_
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
-\`\`\`bash
-git clone <repository-url>
-cd job-listing-app
-\`\`\`
+   \`\`\`bash
+   git clone https://github.com/Dibotaye/job-listener-final-task.git
+   cd job-listing-app
+   \`\`\`
 
 2. Install dependencies:
-\`\`\`bash
-npm install
-\`\`\`
+   \`\`\`bash
+   npm install
+   \`\`\`
 
 3. Run the development server:
-\`\`\`bash
-npm run dev
-\`\`\`
+   \`\`\`bash
+   npm run dev
+   \`\`\`
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
@@ -80,15 +71,18 @@ npm run dev
 The application integrates with the following API endpoints:
 
 ### Authentication
+
 - `POST /signup` - User registration
 - `POST /login` - User authentication
 - `POST /verify-email` - Email verification
 
 ### Jobs
+
 - `GET /opportunities/search` - Fetch job opportunities
 - `GET /opportunities/:id` - Get job details
 
 ### Bookmarks
+
 - `GET /bookmarks` - Get user bookmarks
 - `POST /bookmarks/:eventID` - Add bookmark
 - `DELETE /bookmarks/:eventID` - Remove bookmark
@@ -96,18 +90,20 @@ The application integrates with the following API endpoints:
 ## Testing
 
 ### Unit Tests (Jest)
+
 \`\`\`bash
 npm test
 \`\`\`
 
 ### E2E Tests (Cypress)
+
 \`\`\`bash
 npm run cypress:open
 \`\`\`
 
 ## Project Structure
 
-\`\`\`
+```
 ├── app/                    # Next.js app directory
 │   ├── auth/              # Authentication pages
 │   ├── globals.css        # Global styles
@@ -120,7 +116,7 @@ npm run cypress:open
 ├── __tests__/             # Jest tests
 ├── cypress/               # Cypress E2E tests
 └── public/                # Static assets
-\`\`\`
+```
 
 ## Technologies Used
 
@@ -134,23 +130,27 @@ npm run cypress:open
 ## Key Features Implementation
 
 ### Bookmark Functionality
+
 - Toggle bookmark status on job cards
 - Dedicated bookmarked jobs view
 - Real-time bookmark count updates
 - Authentication-protected bookmark operations
 
 ### Authentication System
+
 - Secure user registration and login
 - Email verification with OTP
 - JWT token management
 - Protected routes and API calls
 
 ### Search & Filter
+
 - Real-time job search by title
 - Sort options for job listings
 - Responsive search interface
 
 ### Error Handling
+
 - Comprehensive error boundaries
 - User-friendly error messages
 - Network error recovery
@@ -164,7 +164,3 @@ npm run cypress:open
 4. Add tests for new functionality
 5. Run the test suite
 6. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License.

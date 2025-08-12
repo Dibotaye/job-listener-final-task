@@ -2,11 +2,7 @@ import type { SignupFormData, SigninFormData, VerifyEmailData, AuthResponse } fr
 
 const BASE_URL = "https://akil-backend.onrender.com"
 
-/**
- * Sign up a new user
- * @param userData - User signup data
- * @returns Promise<AuthResponse> Response from signup API
- */
+
 export async function signupUser(userData: SignupFormData): Promise<AuthResponse> {
   try {
     const response = await fetch(`${BASE_URL}/signup`, {
@@ -35,11 +31,7 @@ export async function signupUser(userData: SignupFormData): Promise<AuthResponse
   }
 }
 
-/**
- * Sign in an existing user
- * @param credentials - User signin credentials
- * @returns Promise<AuthResponse> Response from signin API with access token
- */
+
 export async function signinUser(credentials: SigninFormData): Promise<AuthResponse> {
   try {
     const response = await fetch(`${BASE_URL}/login`, {
@@ -76,11 +68,7 @@ export async function signinUser(credentials: SigninFormData): Promise<AuthRespo
   }
 }
 
-/**
- * Verify user email with OTP
- * @param verificationData - Email and OTP data
- * @returns Promise<AuthResponse> Response from verification API
- */
+
 export async function verifyEmail(verificationData: VerifyEmailData): Promise<AuthResponse> {
   try {
     const response = await fetch(`${BASE_URL}/verify-email`, {
@@ -116,10 +104,7 @@ export async function verifyEmail(verificationData: VerifyEmailData): Promise<Au
   }
 }
 
-/**
- * Get stored access token
- * @returns string | null Access token from localStorage
- */
+
 export function getAccessToken(): string | null {
   if (typeof window !== "undefined") {
     return localStorage.getItem("accessToken")
@@ -127,10 +112,7 @@ export function getAccessToken(): string | null {
   return null
 }
 
-/**
- * Get stored user data
- * @returns any | null User data from localStorage
- */
+
 export function getUserData(): any | null {
   if (typeof window !== "undefined") {
     const userData = localStorage.getItem("userData")
@@ -139,17 +121,12 @@ export function getUserData(): any | null {
   return null
 }
 
-/**
- * Check if user is authenticated
- * @returns boolean Whether user has valid access token
- */
+
 export function isAuthenticated(): boolean {
   return !!getAccessToken()
 }
 
-/**
- * Logout user by clearing stored data
- */
+
 export function logout(): void {
   if (typeof window !== "undefined") {
     localStorage.removeItem("accessToken")

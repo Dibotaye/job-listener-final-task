@@ -64,11 +64,7 @@ export async function getBookmarks(): Promise<Bookmark[]> {
   }
 }
 
-/**
- * Add a job to bookmarks
- * @param jobId - The job ID to bookmark
- * @returns Promise<boolean> Success status
- */
+
 export async function addBookmark(jobId: string): Promise<boolean> {
   try {
     const token = getAccessToken()
@@ -108,11 +104,7 @@ export async function addBookmark(jobId: string): Promise<boolean> {
   }
 }
 
-/**
- * Remove a job from bookmarks
- * @param jobId - The job ID to unbookmark
- * @returns Promise<boolean> Success status
- */
+
 export async function removeBookmark(jobId: string): Promise<boolean> {
   try {
     const token = getAccessToken()
@@ -151,12 +143,7 @@ export async function removeBookmark(jobId: string): Promise<boolean> {
   }
 }
 
-/**
- * Toggle bookmark status for a job
- * @param jobId - The job ID to toggle
- * @param currentStatus - Current bookmark status
- * @returns Promise<boolean> New bookmark status
- */
+
 export async function toggleBookmark(jobId: string, currentStatus: boolean): Promise<boolean> {
   try {
     if (currentStatus) {

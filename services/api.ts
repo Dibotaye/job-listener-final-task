@@ -3,10 +3,7 @@ import { getAccessToken } from "./auth"
 
 const BASE_URL = "https://akil-backend.onrender.com"
 
-/**
- * Fetches all opportunities from the API
- * @returns Promise<Job[]> Array of job opportunities
- */
+
 export async function fetchOpportunities(): Promise<Job[]> {
   try {
     const token = getAccessToken()
@@ -47,11 +44,7 @@ export async function fetchOpportunities(): Promise<Job[]> {
   }
 }
 
-/**
- * Search opportunities by title
- * @param query - Search query
- * @returns Promise<Job[]> Array of matching job opportunities
- */
+
 export async function searchOpportunities(query: string): Promise<Job[]> {
   try {
     const token = getAccessToken()
@@ -93,11 +86,7 @@ export async function searchOpportunities(query: string): Promise<Job[]> {
   }
 }
 
-/**
- * Fetches a specific opportunity by ID
- * @param id - The opportunity ID
- * @returns Promise<Job> The job opportunity details
- */
+
 export async function fetchOpportunityById(id: string): Promise<Job> {
   try {
     if (!id) {

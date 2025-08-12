@@ -20,10 +20,7 @@ export interface BookmarkResponse {
   errors?: any
 }
 
-/**
- * Get all bookmarked jobs for the authenticated user
- * @returns Promise<Bookmark[]> Array of bookmarked jobs
- */
+
 export async function getBookmarks(): Promise<Bookmark[]> {
   try {
     const token = getAccessToken()
@@ -78,7 +75,7 @@ export async function addBookmark(jobId: string): Promise<boolean> {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({}), // Empty body as specified
+      body: JSON.stringify({}), 
     })
 
     if (!response.ok) {

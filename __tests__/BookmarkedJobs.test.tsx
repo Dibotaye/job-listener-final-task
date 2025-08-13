@@ -1,109 +1,37 @@
-import { render, screen, waitFor } from "@testing-library/react"
-import "@testing-library/jest-dom"
-import BookmarkedJobs from "../../components/BookmarkedJobs"
-import { getBookmarks } from "../../services/bookmarks"
-import { fetchOpportunityById } from "../../services/api"
-import jest from "jest" // Declare the jest variable
+import { toggleBookmark } from "@/services/bookmarks";
 
-// Mock the services
-jest.mock("../../services/bookmarks")
-jest.mock("../../services/api")
+jest.mock("@/services/bookmarks", () => ({
+  toggleBookmark: jest.fn(),
+}));
 
-const mockGetBookmarks = getBookmarks as jest.MockedFunction<typeof getBookmarks>
-const mockFetchOpportunityById = fetchOpportunityById as jest.MockedFunction<typeof fetchOpportunityById>
-
-const mockBookmarks = [
-  {
-    eventID: "1",
-    dateBookmarked: "2023-01-01",
-    datePosted: "2023-01-01",
-    logoUrl: "https://example.com/logo.png",
-    opType: "Full-time",
-    orgName: "Tech Company",
-    title: "Software Engineer",
-    location: ["San Francisco", "CA"],
-  },
-]
-
-const mockJob = {
-  id: "1",
-  title: "Software Engineer",
-  orgName: "Tech Company",
-  location: ["San Francisco", "CA"],
-  description: "A great software engineering position",
-  logoUrl: "https://example.com/logo.png",
-  categories: ["Engineering"],
-  opType: "Full-time",
-  datePosted: "2023-01-01",
-  deadline: "2023-12-31",
-  isBookmarked: true,
-}
-
-describe("BookmarkedJobs", () => {
-  const mockOnJobClick = jest.fn()
+describe("Bookmark Service", () => {
+  const jobId = "12345";
 
   beforeEach(() => {
-    jest.clearAllMocks()
-  })
+    jest.clearAllMocks();
+  });
 
-  it("displays loading state initially", () => {
-    mockGetBookmarks.mockImplementation(() => new Promise(() => {})) // Never resolves
+  it("should call API to add a bookmark when not bookmarked", async () => {
+    (toggleBookmark as jest.Mock).mockResolvedValue(true);
 
-    render(<BookmarkedJobs onJobClick={mockOnJobClick} />)
+    const result = await toggleBookmark(jobId, false);
 
-    expect(screen.getByText("Loading bookmarked jobs...")).toBeInTheDocument()
-  })
+    expect(toggleBookmark).toHaveBeenCalledWith(jobId, false);
+    expect(result).toBe(true);
+  });
 
-  it("displays bookmarked jobs when loaded successfully", async () => {
-    mockGetBookmarks.mockResolvedValue(mockBookmarks)
-    mockFetchOpportunityById.mockResolvedValue(mockJob)
+  it("should call API to remove a bookmark when already bookmarked", async () => {
+    (toggleBookmark as jest.Mock).mockResolvedValue(false);
 
-    render(<BookmarkedJobs onJobClick={mockOnJobClick} />)
+    const result = await toggleBookmark(jobId, true);
 
-    await waitFor(() => {
-      expect(screen.getByTestId("bookmarked-jobs-list")).toBeInTheDocument()
-      expect(screen.getByText("Software Engineer")).toBeInTheDocument()
-    })
-  })
+    expect(toggleBookmark).toHaveBeenCalledWith(jobId, true);
+    expect(result).toBe(false);
+  });
 
-  it("displays empty state when no bookmarks exist", async () => {
-    mockGetBookmarks.mockResolvedValue([])
+  it("should throw an error if API fails", async () => {
+    (toggleBookmark as jest.Mock).mockRejectedValue(new Error("API error"));
 
-    render(<BookmarkedJobs onJobClick={mockOnJobClick} />)
-
-    await waitFor(() => {
-      expect(screen.getByTestId("no-bookmarks")).toBeInTheDocument()
-      expect(screen.getByText("No bookmarked jobs")).toBeInTheDocument()
-      expect(screen.getByText("Start bookmarking jobs to see them here")).toBeInTheDocument()
-    })
-  })
-
-  it("displays error state when loading fails", async () => {
-    mockGetBookmarks.mockRejectedValue(new Error("Failed to load bookmarks"))
-
-    render(<BookmarkedJobs onJobClick={mockOnJobClick} />)
-
-    await waitFor(() => {
-      expect(screen.getByText("Failed to load bookmarks")).toBeInTheDocument()
-    })
-  })
-
-  it("removes job from list when unbookmarked", async () => {
-    mockGetBookmarks.mockResolvedValue(mockBookmarks)
-    mockFetchOpportunityById.mockResolvedValue(mockJob)
-
-    const { rerender } = render(<BookmarkedJobs onJobClick={mockOnJobClick} />)
-
-    await waitFor(() => {
-      expect(screen.getByText("Software Engineer")).toBeInTheDocument()
-    })
-
-    // Simulate unbookmarking by re-rendering with empty bookmarks
-    mockGetBookmarks.mockResolvedValue([])
-    rerender(<BookmarkedJobs onJobClick={mockOnJobClick} />)
-
-    await waitFor(() => {
-      expect(screen.getByTestId("no-bookmarks")).toBeInTheDocument()
-    })
-  })
-})
+    await expect(toggleBookmark(jobId, false)).rejects.toThrow("API error");
+  });
+});

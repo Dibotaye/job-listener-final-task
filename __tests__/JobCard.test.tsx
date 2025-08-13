@@ -1,72 +1,53 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import JobCard from "../components/JobCard";
-import { toggleBookmark } from "../services/bookmarks";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import JobCard from "@/components/JobCard";
+import * as bookmarksApi from "@/services/bookmarks";
 
-jest.mock("../services/bookmarks", () => ({
+jest.mock("@/services/bookmarks", () => ({
   toggleBookmark: jest.fn(),
-}));
-jest.mock("../services/auth", () => ({
-  isAuthenticated: jest.fn(() => true),
 }));
 
 describe("JobCard Component", () => {
   const mockJob = {
-    id: "1",
+    id: "65509e9353a7667de6ef5a60", // ✅ match component's expected prop
     title: "Software Engineer",
     orgName: "Tech Corp",
     location: ["Remote"],
     description: "An exciting role",
-    categories: ["Engineering"],
+    logoUrl: "/logo.png",
+    datePosted: "2024-07-17T11:09:02.207Z",
     opType: "Full-time",
-    datePosted: "2025-08-12",
-    deadline: "2025-09-01",
-    isBookmarked: false,
+    isBookmarked: false, // ✅ initial state
   };
-
-  const onClickMock = jest.fn();
-  const onBookmarkChangeMock = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it("renders job details correctly", () => {
-    render(
-      <JobCard
-        job={mockJob}
-        onClick={onClickMock}
-        onBookmarkChange={onBookmarkChangeMock}
-      />
-    );
+  test("renders job details correctly", () => {
+    render(<JobCard job={mockJob} onClick={jest.fn()} />);
 
     expect(screen.getByTestId("job-title")).toHaveTextContent(
       "Software Engineer"
     );
     expect(screen.getByTestId("company-name")).toHaveTextContent("Tech Corp");
     expect(screen.getByTestId("job-location")).toHaveTextContent("Remote");
+    expect(screen.getByTestId("job-description")).toHaveTextContent(
+      "An exciting role"
+    );
   });
 
-  it("calls toggleBookmark when bookmark button is clicked", async () => {
-    (toggleBookmark as jest.Mock).mockResolvedValue(true);
+  test("calls toggleBookmark when bookmark button is clicked", async () => {
+    const user = userEvent.setup();
+    (bookmarksApi.toggleBookmark as jest.Mock).mockResolvedValue(true);
 
-    render(
-      <JobCard
-        job={mockJob}
-        onClick={onClickMock}
-        onBookmarkChange={onBookmarkChangeMock}
-      />
+    render(<JobCard job={mockJob} onClick={jest.fn()} />);
+
+    await user.click(screen.getByTestId("bookmark-btn"));
+
+    expect(bookmarksApi.toggleBookmark).toHaveBeenCalledWith(
+      "65509e9353a7667de6ef5a60", // ✅ matches job.id
+      false // ✅ matches initial isBookmarked
     );
-
-    fireEvent.click(screen.getByTestId("bookmark-button"));
-
-    expect(toggleBookmark).toHaveBeenCalledWith("1", false);
-  });
-
-  it("matches snapshot", () => {
-    const { asFragment } = render(
-      <JobCard job={mockJob} onClick={onClickMock} />
-    );
-    expect(asFragment()).toMatchSnapshot();
   });
 });

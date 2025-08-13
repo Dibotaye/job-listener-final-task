@@ -26,10 +26,6 @@ _Browse and search job opportunities with bookmark functionality_
 ![Bookmarked Jobs](./screenshots/image.png)
 _View and manage saved job opportunities_
 
-### 6. cypress test
-
-![cypress test](./screenshots/cypress.png)
-_cypress test result_
 
 ## Getting Started
 
